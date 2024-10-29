@@ -25,6 +25,10 @@ jobs:
       - name: Build
         run: go build -v
 
+      - name: Build documentation
+        run: go generate ./...
+        working-directory: tools
+
   lint:
 
     name: Lint
