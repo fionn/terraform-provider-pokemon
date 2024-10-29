@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/mtslzr/pokeapi-go"
-	// "github.com/mtslzr/pokeapi-go/structs"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -34,10 +33,12 @@ func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 		// TODO: expand attributes.
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int32Attribute{
-				Required: true,
+				Description: "Pokédex number",
+				Required:    true,
 			},
 			"name": schema.StringAttribute{
-				Computed: true,
+				Description: "Pokémon name",
+				Computed:    true,
 			},
 		},
 	}
