@@ -43,6 +43,11 @@ jobs:
       - name: Check formatting
         run: test -z "$(gofmt -l .)"
 
+      - name: Lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.61.0
+
   test:
 
     name: Test
