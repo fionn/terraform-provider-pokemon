@@ -16,6 +16,8 @@ func TestAccPokemonsDataSource(t *testing.T) {
 					resource.TestCheckResourceAttr("data.pokemon.test", "id", "1"),
 					resource.TestCheckResourceAttr("data.pokemon.test", "name", "bulbasaur"),
 					resource.TestCheckResourceAttrSet("data.pokemon.test", "types.#"),
+					resource.TestCheckResourceAttr("data.pokemon.test", "height", "0.7"),
+					resource.TestCheckResourceAttr("data.pokemon.test", "weight", "6.9"),
 				),
 			},
 		},

@@ -26,9 +26,11 @@ func (d *pokemonDataSource) Metadata(_ context.Context, req datasource.MetadataR
 }
 
 type pokemonDataSourceModel struct {
-	ID    types.Int32  `tfsdk:"id"`
-	Name  types.String `tfsdk:"name"`
-	Types types.List   `tfsdk:"types"`
+	ID     types.Int32   `tfsdk:"id"`
+	Name   types.String  `tfsdk:"name"`
+	Types  types.List    `tfsdk:"types"`
+	Height types.Float64 `tfsdk:"height"`
+	Weight types.Float64 `tfsdk:"weight"`
 }
 
 func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -46,6 +48,14 @@ func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 			"types": schema.ListAttribute{
 				Description: "Pokémon types",
 				ElementType: types.StringType,
+				Computed:    true,
+			},
+			"height": schema.Float64Attribute{
+				Description: "Height in metres",
+				Computed:    true,
+			},
+			"weight": schema.Float64Attribute{
+				Description: "Weight in kilograms",
 				Computed:    true,
 			},
 		},
@@ -74,9 +84,11 @@ func (d *pokemonDataSource) Read(ctx context.Context, req datasource.ReadRequest
 	pokemonTypesListValue, _ := types.ListValue(types.StringType, pokemonTypes)
 
 	state = pokemonDataSourceModel{
-		ID:    types.Int32Value(int32(pokemon.ID)),
-		Name:  types.StringValue(pokemon.Name),
-		Types: pokemonTypesListValue,
+		ID:     types.Int32Value(int32(pokemon.ID)),
+		Name:   types.StringValue(pokemon.Name),
+		Types:  pokemonTypesListValue,
+		Height: types.Float64Value(float64(pokemon.Height) / 10),
+		Weight: types.Float64Value(float64(pokemon.Weight) / 10),
 	}
 
 	diags := resp.State.Set(ctx, &state)
