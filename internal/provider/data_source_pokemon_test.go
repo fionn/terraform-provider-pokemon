@@ -15,6 +15,7 @@ func TestAccPokemonsDataSource(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("data.pokemon.test", "id", "1"),
 					resource.TestCheckResourceAttr("data.pokemon.test", "name", "bulbasaur"),
+					resource.TestCheckResourceAttrSet("data.pokemon.test", "types.#"),
 				),
 			},
 		},

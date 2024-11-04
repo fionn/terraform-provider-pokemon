@@ -5,9 +5,11 @@ import (
 
 	"github.com/mtslzr/pokeapi-go"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 )
 
 type pokemonDataSource struct {
@@ -24,8 +26,9 @@ func (d *pokemonDataSource) Metadata(_ context.Context, req datasource.MetadataR
 }
 
 type pokemonDataSourceModel struct {
-	ID   types.Int32  `tfsdk:"id"`
-	Name types.String `tfsdk:"name"`
+	ID    types.Int32  `tfsdk:"id"`
+	Name  types.String `tfsdk:"name"`
+	Types types.List   `tfsdk:"types"`
 }
 
 func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -38,6 +41,11 @@ func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 			},
 			"name": schema.StringAttribute{
 				Description: "Pokémon name",
+				Computed:    true,
+			},
+			"types": schema.ListAttribute{
+				Description: "Pokémon types",
+				ElementType: types.StringType,
 				Computed:    true,
 			},
 		},
@@ -58,9 +66,17 @@ func (d *pokemonDataSource) Read(ctx context.Context, req datasource.ReadRequest
 		return
 	}
 
+	pokemonTypes := make([]attr.Value, len(pokemon.Types))
+	for i, t := range pokemon.Types {
+		pokemonTypes[i] = basetypes.NewStringValue(t.Type.Name)
+	}
+
+	pokemonTypesListValue, _ := types.ListValue(types.StringType, pokemonTypes)
+
 	state = pokemonDataSourceModel{
-		ID:   types.Int32Value(int32(pokemon.ID)),
-		Name: types.StringValue(pokemon.Name),
+		ID:    types.Int32Value(int32(pokemon.ID)),
+		Name:  types.StringValue(pokemon.Name),
+		Types: pokemonTypesListValue,
 	}
 
 	diags := resp.State.Set(ctx, &state)
