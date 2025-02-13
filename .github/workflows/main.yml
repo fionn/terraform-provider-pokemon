@@ -19,6 +19,11 @@ jobs:
         with:
           go-version: "1.23"
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+
       - name: Download dependencies
         run: go mod download
 
