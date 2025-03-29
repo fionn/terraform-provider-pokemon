@@ -17,7 +17,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version: 1.24
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -47,15 +47,15 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version: 1.24
 
       - name: Check formatting
         run: test -z "$(gofmt -l .)"
 
       - name: Lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
-          version: v1.61.0
+          version: v2.0.2
 
   test:
 
@@ -70,7 +70,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version: 1.24
 
       - name: Download dependencies
         run: go mod download
@@ -101,7 +101,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version: 1.24
 
       - name: Import PGP key
         id: pgp
@@ -109,11 +109,12 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.PGP_PRIVATE_KEY }}
           passphrase: ${{ secrets.PGP_PASSPHRASE }}
+          fingerprint: 5DD1B83D418D1DE5B8EE67FCC1C07C3443184B72
 
       - name: Release
         uses: goreleaser/goreleaser-action@v6
         with:
-          args: release --clean
+          args: release --fail-fast
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PGP_FINGERPRINT: ${{ steps.pgp.outputs.fingerprint }}
