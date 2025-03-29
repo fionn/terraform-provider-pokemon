@@ -21,7 +21,7 @@ description: |-
 
 ### Read-Only
 
-- `height` (Number) Height in metres
+- `height` (Number) Height in meters
 - `name` (String) Pokémon name
 - `types` (List of String) Pokémon types
 - `weight` (Number) Weight in kilograms

@@ -51,7 +51,7 @@ func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				Computed:    true,
 			},
 			"height": schema.Float64Attribute{
-				Description: "Height in metres",
+				Description: "Height in meters",
 				Computed:    true,
 			},
 			"weight": schema.Float64Attribute{
