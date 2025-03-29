@@ -57,6 +57,11 @@ jobs:
         with:
           version: v2.0.2
 
+      - name: Check goreleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          args: check
+
   test:
 
     name: Test
