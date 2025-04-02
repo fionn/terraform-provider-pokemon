@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     pokemon = {
-      source = "example.com/fionn/pokemon"
+      source  = "fionn/pokemon"
+      version = "x.y.z"
     }
   }
 }

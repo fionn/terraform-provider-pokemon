@@ -35,6 +35,7 @@ type pokemonDataSourceModel struct {
 
 func (d *pokemonDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Description: "A pokémon",
 		// TODO: expand attributes.
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int32Attribute{

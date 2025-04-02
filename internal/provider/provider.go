@@ -23,7 +23,9 @@ func (p *pokemonProvider) Metadata(ctx context.Context, req provider.MetadataReq
 }
 
 func (p *pokemonProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
-	resp.Schema = schema.Schema{}
+	resp.Schema = schema.Schema{
+		Description: "Add and reference Pokémon data sources",
+	}
 }
 
 func (p *pokemonProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
