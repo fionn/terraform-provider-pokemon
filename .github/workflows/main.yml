@@ -63,7 +63,7 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v7
         with:
-          version: v2.0.2
+          version: v2.5.0
 
       - name: Check goreleaser
         uses: goreleaser/goreleaser-action@v6
