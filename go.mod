@@ -1,4 +1,4 @@
-module terraform-provider-pokemon
+module github.com/fionn/terraform-provider-pokemon
 
 go 1.24.1
 

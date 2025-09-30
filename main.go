@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 
-	"terraform-provider-pokemon/internal/provider"
+	"github.com/fionn/terraform-provider-pokemon/internal/provider"
 )
 
 const version string = "dev"
