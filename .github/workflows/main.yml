@@ -61,7 +61,7 @@ jobs:
         uses: fionn/newline-linter@v1.0.2
 
       - name: Lint
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@v8
         with:
           version: v2.5.0
 
