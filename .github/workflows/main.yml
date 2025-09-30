@@ -17,7 +17,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -52,7 +52,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Check formatting
         run: test -z "$(gofmt -l .)"
@@ -83,7 +83,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Download dependencies
         run: go mod download
@@ -114,7 +114,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Import PGP key
         id: pgp
