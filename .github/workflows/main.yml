@@ -73,7 +73,7 @@ jobs:
           version: v2.12.2
 
       - name: Check goreleaser
-        uses: goreleaser/goreleaser-action@v7.2.2
+        uses: goreleaser/goreleaser-action@v7.2.3
         with:
           args: check
 
@@ -138,7 +138,7 @@ jobs:
           fingerprint: 5DD1B83D418D1DE5B8EE67FCC1C07C3443184B72
 
       - name: Release
-        uses: goreleaser/goreleaser-action@v7.2.2
+        uses: goreleaser/goreleaser-action@v7.2.3
         with:
           args: release --fail-fast
         env:
